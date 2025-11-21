@@ -1,0 +1,1175 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Happy Birthday, Mamatha Reddy!</title>
+  <meta name="description" content="A warm, uplifting birthday tribute page for Mamatha Reddy." />
+  <style>
+    /* Root palette inspired by user's colors: red, white, black, blue */
+    :root{
+      --red: #e63946;
+      --blue: #1d4ed8;
+      --black: #0f172a;
+      --muted: #6b7280;
+      --bg: #ffffff;
+      --glass: rgba(255,255,255,0.7);
+      --card-shadow: 0 8px 24px rgba(15,23,42,0.08);
+      --radius: 16px;
+      --maxw: 1100px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;
+      /* Subtle sunrise background */
+      background: linear-gradient(180deg, #fff 0%, #f8fafc 100%);
+      background-image: radial-gradient(circle at 10% 20%, rgba(230, 57, 70, 0.05) 0%, transparent 20%),
+                        radial-gradient(circle at 90% 80%, rgba(29, 78, 216, 0.05) 0%, transparent 20%);
+      color:var(--black);
+      position: relative;
+      overflow-x: hidden;
+    }
+    
+    /* Sparkle animation */
+    .sparkle {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--red);
+      box-shadow: 0 0 10px 2px var(--red);
+      animation: sparkle-animation 2s infinite ease-in-out;
+      z-index: -1;
+    }
+    
+    @keyframes sparkle-animation {
+      0%, 100% { opacity: 0; transform: translateY(0) rotate(0deg); }
+      50% { opacity: 1; transform: translateY(-20px) rotate(180deg); }
+    }
+    
+    /* Header styling */
+    .main-header {
+      text-align: center;
+      padding: 30px 20px;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, var(--red), var(--blue));
+      color: white;
+      border-radius: var(--radius);
+      box-shadow: var(--card-shadow);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .main-header h1 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      margin: 0 0 10px 0;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+      letter-spacing: 1px;
+      font-family: 'Comic Sans MS', 'Arial Rounded MT Bold', 'Segoe UI', sans-serif; /* Playful, modern font */
+    }
+    
+    .main-header p {
+      font-size: 1.4rem;
+      font-weight: 300;
+      margin: 0;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    }
+    
+    /* Hero section with animated confetti */
+    .hero-section {
+      position: relative;
+      padding: 60px 20px;
+      text-align: center;
+      margin: 30px 0;
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: linear-gradient(135deg, 
+        rgba(230, 57, 70, 0.1), 
+        rgba(29, 78, 216, 0.1), 
+        rgba(255, 255, 255, 0.1));
+      box-shadow: var(--card-shadow);
+    }
+    
+    .hero-section h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin: 0 0 20px 0;
+      color: var(--black);
+      font-family: 'Comic Sans MS', 'Arial Rounded MT Bold', 'Segoe UI', sans-serif; /* Playful, modern font */
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    }
+    
+    .hero-section p {
+      font-size: 1.3rem;
+      max-width: 700px;
+      margin: 0 auto 20px;
+      color: var(--muted);
+    }
+    
+    /* Animated confetti for hero section */
+    .hero-confetti {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+    
+    .confetti-piece {
+      position: absolute;
+      width: 10px;
+      height: 16px;
+      background: var(--red);
+      top: -20px;
+      opacity: 0;
+    }
+    
+    /* Carousel styles */
+    .carousel-container {
+      margin: 40px 0;
+      padding: 20px;
+      background: var(--glass);
+      border-radius: var(--radius);
+      box-shadow: var(--card-shadow);
+    }
+    
+    .carousel-title {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 1.8rem;
+      color: var(--black);
+    }
+    
+    .carousel {
+      display: flex;
+      overflow-x: auto;
+      gap: 20px;
+      padding: 10px;
+      scroll-behavior: smooth;
+    }
+    
+    .carousel-item {
+      min-width: 120px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    
+    .carousel-item:hover {
+      transform: scale(1.1);
+    }
+    
+    .carousel-icon {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, var(--red), var(--blue));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 10px;
+      font-size: 2rem;
+      color: white;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    
+    .carousel-text {
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+    
+    .quote-popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: white;
+      padding: 30px;
+      border-radius: var(--radius);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      z-index: 1000;
+      max-width: 500px;
+      text-align: center;
+      display: none;
+    }
+    
+    .quote-popup.active {
+      display: block;
+      animation: popup 0.3s ease;
+    }
+    
+    @keyframes popup {
+      0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
+      100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+    }
+    
+    .quote-popup .close {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--muted);
+    }
+    
+    /* Motto banner */
+    .motto-banner {
+      background: linear-gradient(135deg, var(--red), var(--blue));
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+      border-radius: var(--radius);
+      margin: 40px 0;
+      box-shadow: var(--card-shadow);
+    }
+    
+    .motto-banner h2 {
+      font-size: 2.2rem;
+      margin: 0 0 15px 0;
+      font-weight: 700;
+    }
+    
+    .motto-banner p {
+      font-family: 'Dancing Script', cursive, 'Segoe UI', sans-serif;
+      font-size: 1.5rem;
+      margin: 0;
+      font-weight: 500;
+    }
+    
+    /* Journey map */
+    .journey-map {
+      background: var(--glass);
+      border-radius: var(--radius);
+      padding: 30px;
+      margin: 40px 0;
+      box-shadow: var(--card-shadow);
+    }
+    
+    .journey-map h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 1.8rem;
+    }
+    
+    .map-container {
+      position: relative;
+      height: 400px;
+      background: linear-gradient(135deg, rgba(230, 57, 70, 0.05), rgba(29, 78, 216, 0.05));
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    
+    .map-icon {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      background: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      font-size: 1.5rem;
+      transition: all 0.3s ease;
+    }
+    
+    .map-icon:hover {
+      transform: scale(1.2);
+      z-index: 10;
+    }
+    
+    .path-line {
+      position: absolute;
+      height: 4px;
+      background: linear-gradient(90deg, var(--red), var(--blue));
+      transform-origin: 0 0;
+    }
+    
+    /* Dashboard */
+    .dashboard {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin: 40px 0;
+    }
+    
+    .dashboard-card {
+      background: var(--glass);
+      border-radius: var(--radius);
+      padding: 20px;
+      text-align: center;
+      box-shadow: var(--card-shadow);
+    }
+    
+    .dashboard-icon {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+      color: var(--blue);
+    }
+    
+    .dashboard-title {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+    
+    .bar-graph {
+      height: 10px;
+      background: #e2e8f0;
+      border-radius: 5px;
+      margin: 15px 0;
+      overflow: hidden;
+    }
+    
+    .bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--red), var(--blue));
+      border-radius: 5px;
+    }
+    
+    /* Timeline */
+    .timeline {
+      position: relative;
+      padding: 30px 0;
+      margin: 40px 0;
+    }
+    
+    .timeline::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: linear-gradient(to bottom, var(--red), var(--blue));
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    
+    .timeline-item {
+      position: relative;
+      width: 50%;
+      padding: 20px;
+      margin-bottom: 30px;
+    }
+    
+    .timeline-item:nth-child(odd) {
+      left: 0;
+    }
+    
+    .timeline-item:nth-child(even) {
+      left: 50%;
+    }
+    
+    .timeline-icon {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      background: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      font-size: 1.5rem;
+      top: 20px;
+    }
+    
+    .timeline-item:nth-child(odd) .timeline-icon {
+      right: -25px;
+    }
+    
+    .timeline-item:nth-child(even) .timeline-icon {
+      left: -25px;
+    }
+    
+    .timeline-content {
+      background: var(--glass);
+      padding: 20px;
+      border-radius: var(--radius);
+      box-shadow: var(--card-shadow);
+    }
+    
+    /* Wishes wall */
+    .wishes-wall {
+      background: var(--glass);
+      border-radius: var(--radius);
+      padding: 30px;
+      margin: 40px 0;
+      box-shadow: var(--card-shadow);
+    }
+    
+    .wishes-wall h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    
+    .wishes-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: center;
+    }
+    
+    .wish-note {
+      background: linear-gradient(135deg, var(--red), var(--blue));
+      color: white;
+      padding: 15px;
+      border-radius: 10px;
+      width: 200px;
+      min-height: 150px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      font-family: 'Comic Sans MS', cursive, 'Segoe UI', sans-serif;
+      position: relative;
+      transform: rotate(-2deg);
+    }
+    
+    .wish-note:nth-child(even) {
+      transform: rotate(2deg);
+    }
+    
+    .wish-note::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      right: 20px;
+      width: 0;
+      height: 0;
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      border-top: 10px solid var(--red);
+    }
+    
+    /* Footer */
+    footer {
+      background: #f8fafc;
+      padding: 30px 20px;
+      text-align: center;
+      margin-top: 40px;
+      border-top: 4px solid var(--red);
+      border-bottom: 4px solid var(--blue);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--red), var(--blue), var(--black));
+    }
+    
+    footer::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--black), var(--blue), var(--red));
+    }
+    
+    .footer-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+    
+    .footer-btn {
+      padding: 12px 24px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--red), var(--blue));
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transition: transform 0.2s ease;
+    }
+    
+    .footer-btn:hover {
+      transform: translateY(-3px);
+    }
+
+    a{color:var(--blue);text-decoration:none}
+
+    .wrap{max-width:var(--maxw);margin:28px auto;padding:20px}
+
+    header{display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:64px;height:64px;border-radius:12px;background:linear-gradient(135deg,var(--red),var(--blue));display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:20px;box-shadow:var(--card-shadow)}
+    .title h1{margin:0;font-size:20px}
+    .title p{margin:0;color:var(--muted);font-size:13px}
+
+    nav{display:flex;gap:12px}
+    .btn{padding:8px 14px;border-radius:10px;background:transparent;border:1px solid rgba(0,0,0,0.06);cursor:pointer}
+    .primary{background:var(--red);color:white;border:0}
+
+    /* Hero */
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:24px;margin-top:22px}
+    .card{background:var(--glass);backdrop-filter: blur(6px);padding:20px;border-radius:var(--radius);box-shadow:var(--card-shadow)}
+    .lead{font-size:28px;margin:0 0 8px}
+    .sub{color:var(--muted);margin:0 0 16px}
+
+    /* Stats / favorites */
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px}
+    .pill{padding:10px;border-radius:12px;background:white;border:1px solid rgba(15,23,42,0.03)}
+
+    /* Details */
+    section{margin-top:20px}
+    h2{font-size:18px;margin:0 0 10px}
+
+    .two-col{display:grid;grid-template-columns:1fr 320px;gap:18px}
+
+    /* Gallery */
+    .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+    .thumb{height:90px;background:#f1f5f9;border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:13px}
+
+    /* Message board */
+    .messages{display:flex;flex-direction:column;gap:10px}
+    .msg{padding:12px;border-radius:10px;background:white;border:1px solid rgba(15,23,42,0.03)}
+    .msg .meta{font-size:12px;color:var(--muted);margin-bottom:6px}
+
+    /* Responsive */
+    @media (max-width:900px){
+      .hero{grid-template-columns:1fr}
+      .two-col{grid-template-columns:1fr}
+      .gallery{grid-template-columns:repeat(2,1fr)}
+      .main-header h1 { font-size: 2rem; }
+      .main-header p { font-size: 1.1rem; }
+      .timeline::before {
+        left: 30px;
+      }
+      .timeline-item {
+        width: calc(100% - 80px);
+        left: 80px !important;
+      }
+      .timeline-item:nth-child(even) .timeline-icon {
+        left: -25px;
+      }
+    }
+
+    /* small helpers */
+    .muted{color:var(--muted)}
+    .cta{display:inline-block;padding:10px 14px;border-radius:12px;background:var(--blue);color:white}
+
+    footer{margin-top:28px;padding:18px;text-align:center;color:var(--muted);font-size:13px}
+
+    /* confetti simple */
+    .confetti{position:fixed;left:0;top:0;right:0;bottom:0;pointer-events:none;z-index:999}
+    .confetti span{position:absolute;width:10px;height:16px;opacity:0;transform:translateY(-20px) rotate(0)}
+  </style>
+</head>
+<body>
+  <!-- Sparkles container -->
+  <div id="sparkles-container"></div>
+  
+  <!-- New elegant header -->
+  <div class="main-header">
+    <h1>Happy Birthday, Nain Mamatha Reddy!</h1>
+    <p>Celebrating a Journey of Heart, Hope, and Happiness</p>
+  </div>
+  
+  <!-- Hero Section -->
+  <div class="hero-section">
+    <div class="hero-confetti" id="hero-confetti"></div>
+    <h1>Happy Birthday, Nain Mamatha Reddy!</h1>
+    <p>You fill the world with love, courage, and new adventures every single day.</p>
+  </div>
+  
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo" aria-hidden>MR</div>
+        <div class="title">
+          <h1>Happy Birthday, Mamatha Reddy!</h1>
+          <p class="sub">A warm tribute celebrating heart, hope and happiness</p>
+        </div>
+      </div>
+      <nav>
+        <button class="btn" onclick="scrollToSection('about')">About</button>
+        <button class="btn" onclick="scrollToSection('favorites')">Favorites</button>
+        <button class="btn" onclick="scrollToSection('wishes')">Wishes</button>
+        <a class="btn primary" href="#messages">Leave a message</a>
+      </nav>
+    </header>
+
+    <main>
+      <!-- Interactive Carousel of Favorites -->
+      <div class="carousel-container">
+        <h2 class="carousel-title">Mamatha's Favorites</h2>
+        <div class="carousel" id="favorites-carousel">
+          <div class="carousel-item" onclick="showQuote('Nothing beats biriyani on a good day!')">
+            <div class="carousel-icon">🍛</div>
+            <div class="carousel-text">Biriyani</div>
+          </div>
+          <div class="carousel-item" onclick="showQuote('A dosa in the morning makes everything better!')">
+            <div class="carousel-icon">🥞</div>
+            <div class="carousel-text">Dosa</div>
+          </div>
+          <div class="carousel-item" onclick="showQuote('Chocolate cake is the sweetest comfort!')">
+            <div class="carousel-icon">🍰</div>
+            <div class="carousel-text">Chocolate Cake</div>
+          </div>
+          <div class="carousel-item" onclick="showQuote('Refreshing watermelon juice on a hot day!')">
+            <div class="carousel-icon">🍉</div>
+            <div class="carousel-text">Watermelon Juice</div>
+          </div>
+          <div class="carousel-item" onclick="showQuote('Pineapple is the king of fruits!')">
+            <div class="carousel-icon">🍍</div>
+            <div class="carousel-text">Pineapple</div>
+          </div>
+          <div class="carousel-item" onclick="showQuote('Dogs are the best companions!')">
+            <div class="carousel-icon">🐶</div>
+            <div class="carousel-text">Dogs</div>
+          </div>
+          <div class="carousel-item" onclick="showQuote('Gadgets keep life buzzing!')">
+            <div class="carousel-icon">📱</div>
+            <div class="carousel-text">Gadgets</div>
+          </div>
+          <div class="carousel-item" onclick="showQuote('Shoes complete every outfit!')">
+            <div class="carousel-icon">👟</div>
+            <div class="carousel-text">Shoes</div>
+          </div>
+          <div class="carousel-item" onclick="showQuote('Jackets for all seasons!')">
+            <div class="carousel-icon">🧥</div>
+            <div class="carousel-text">Jackets</div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Quote Popup -->
+      <div class="quote-popup" id="quote-popup">
+        <span class="close" onclick="closeQuote()">&times;</span>
+        <h3>Inspirational Quote</h3>
+        <p id="quote-text"></p>
+      </div>
+      
+      <!-- Personal Motto Banner -->
+      <div class="motto-banner">
+        <h2>Standing tall despite being broken inside.</h2>
+        <p>Your resilience inspires everyone around you.</p>
+      </div>
+      
+      <!-- Spiritual & Adventure Journey Map -->
+      <div class="journey-map">
+        <h2>Spiritual & Adventure Journey</h2>
+        <div class="map-container" id="journey-map">
+          <!-- Spiritual places -->
+          <div class="map-icon" style="top: 50px; left: 100px;">🛕</div>
+          <div class="map-icon" style="top: 100px; left: 200px;">🏔️</div>
+          <div class="map-icon" style="top: 150px; left: 300px;">🌅</div>
+          <div class="map-icon" style="top: 200px; left: 400px;">⛰️</div>
+          <div class="map-icon" style="top: 250px; left: 500px;">🏔️</div>
+          
+          <!-- Dream destinations -->
+          <div class="map-icon" style="top: 100px; right: 100px;">🏙️</div>
+          <div class="map-icon" style="top: 150px; right: 200px;">🌴</div>
+          <div class="map-icon" style="top: 200px; right: 300px;">✈️</div>
+          <div class="map-icon" style="top: 250px; right: 400px;">🌿</div>
+        </div>
+      </div>
+      
+      <!-- Qualities & Well-being Dashboard -->
+      <div class="dashboard">
+        <div class="dashboard-card">
+          <div class="dashboard-icon">➡️</div>
+          <div class="dashboard-title">Straightforward</div>
+          <p>Honest and direct in communication</p>
+        </div>
+        <div class="dashboard-card">
+          <div class="dashboard-icon">❤️</div>
+          <div class="dashboard-title">Loving</div>
+          <p>Compassionate and caring</p>
+        </div>
+        <div class="dashboard-card">
+          <div class="dashboard-icon">🛡️</div>
+          <div class="dashboard-title">Reliable</div>
+          <p>Dependable and trustworthy</p>
+        </div>
+        <div class="dashboard-card">
+          <div class="dashboard-title">Spontaneity</div>
+          <div class="bar-graph">
+            <div class="bar-fill" style="width: 80%"></div>
+          </div>
+          <p>4/5</p>
+        </div>
+        <div class="dashboard-card">
+          <div class="dashboard-title">Learning</div>
+          <div class="bar-graph">
+            <div class="bar-fill" style="width: 100%"></div>
+          </div>
+          <p>5/5</p>
+        </div>
+      </div>
+      
+      <!-- Moments of Kindness Timeline -->
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-icon">👟</div>
+          <div class="timeline-content">
+            <h3>Kind Friend</h3>
+            <p>A friend once put on your shoes when you forgot them at home.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-icon">🍰</div>
+          <div class="timeline-content">
+            <h3>Pre-Birthday Cake</h3>
+            <p>You got a surprise cake a day before your birthday!</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-icon">🎁</div>
+          <div class="timeline-content">
+            <h3>Birthday Gift</h3>
+            <p>The thoughtful gift that brought tears to your eyes.</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Wishes & Cheer Wall -->
+      <div class="wishes-wall">
+        <h2>What Makes You Happy?</h2>
+        <div class="wishes-container">
+          <div class="wish-note">
+            <p>🎵 Songs that touch the soul</p>
+          </div>
+          <div class="wish-note">
+            <p>🚗 Long drives with the windows down</p>
+          </div>
+          <div class="wish-note">
+            <p>😴 Peaceful sleep after a long day</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Original sections -->
+      <section class="hero">
+        <div class="card">
+          <p class="muted">Celebrating a journey of</p>
+          <h2 class="lead">Heart, Hope &amp; Happiness</h2>
+          <p class="sub">A heartfelt tribute page made to celebrate Mamatha — her spirit, dreams, and the small things that make life joyful.</p>
+
+          <div class="grid-3" aria-hidden>
+            <div class="pill"><strong>Morning person</strong><div class="muted">Loves sunrises &amp; peaceful mornings</div></div>
+            <div class="pill"><strong>Top hobbies</strong><div class="muted">Travel, learning, vlogging, pickleball</div></div>
+            <div class="pill"><strong>Favorite treat</strong><div class="muted">Chocolate cake &amp; biriyani</div></div>
+          </div>
+
+          <div style="margin-top:14px;display:flex;gap:10px;align-items:center">
+            <a class="cta" href="#messages">Send a wish</a>
+            <button class="btn" onclick="togglePlaylist()">Play playlist</button>
+            <button class="btn" onclick="popConfetti()">Celebrate 🎉</button>
+          </div>
+        </div>
+
+        <aside class="card" style="display:flex;flex-direction:column;gap:12px">
+          <div style="display:flex;align-items:center;gap:12px">
+            <div style="width:84px;height:84px;border-radius:12px;background:#f8fafc;display:flex;align-items:center;justify-content:center">Photo</div>
+            <div>
+              <div style="font-weight:700">Mamatha Reddy</div>
+              <div class="muted" style="font-size:13px">Beloved friend, dreamer &amp; morning person</div>
+            </div>
+          </div>
+
+          <div>
+            <strong>Dream destinations</strong>
+            <div class="muted">Dwaraka, Mathura, Puri, Vaishnodevi, Kedarnath, Los Angeles, New Orleans, Munnar, Coorg</div>
+          </div>
+
+          <div>
+            <strong>Playlist</strong>
+            <div class="muted">Kalabhairava Ashtakam + OG album</div>
+            <small class="muted">(click Play playlist to open the embedded player)</small>
+          </div>
+        </aside>
+      </section>
+
+      <section id="about">
+        <div class="two-col">
+          <div>
+            <h2>About Mamatha</h2>
+            <div class="card">
+              <!-- NOTE: Full personalized paragraph content inserted below (from CSV) -->
+              <p>Mamatha is a vibrant soul whose warmth touches everyone she meets. With her passion for travel and adventure, she brings joy to every journey. Her dedication to personal growth and meaningful connections makes her a cherished friend and colleague. Whether she's exploring new places, enjoying her favorite biriyani, or sharing laughter with loved ones, Mamatha embodies the spirit of living life to the fullest.</p>
+
+              <ul style="margin-top:12px">
+                <li><strong>Favorite colors:</strong> Red, White, Black, Blue</li>
+                <li><strong>Favorite foods:</strong> Biriyani, Dosa</li>
+                <li><strong>Comfort drink:</strong> Watermelon juice, pineapple, lime soda with biriyani</li>
+                <li><strong>Movies &amp; shows:</strong> Anand, Godavari, Splitsvilla, Roadies</li>
+                <li><strong>Playlist highlights:</strong> Kalabhairava Ashtakam, OG album</li>
+              </ul>
+            </div>
+
+            <h2 style="margin-top:18px">Dreams &amp; Passions</h2>
+            <div class="card">
+              <p>Romantic, thriller, fantasy and action movies fill her entertainment world. Her hobbies include vlogging adventures and trying new experiences. She deeply values personal growth, rest, and cultivating meaningful connections with friends and family.</p>
+            </div>
+          </div>
+
+          <aside>
+            <h2>Quick Quirks</h2>
+            <div class="card">
+              <p>Loves pups, pineapples, gadgets, shoes and jackets. Wishes for time travel and laughs easily at silly jokes. Her infectious smile brightens any room she enters.</p>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section id="favorites">
+        <h2>Favorites &amp; Little Joys</h2>
+        <div class="card">
+          <div class="gallery" aria-hidden>
+            <div class="thumb">Biriyani</div>
+            <div class="thumb">Chocolate Cake</div>
+            <div class="thumb">Watermelon Juice</div>
+            <div class="thumb">Travel Photos</div>
+            <div class="thumb">Pickleball</div>
+            <div class="thumb">Pups</div>
+          </div>
+
+          <p class="muted" style="margin-top:12px">These are just some of the little joys that bring a smile to Mamatha's face every day.</p>
+        </div>
+      </section>
+
+      <section id="wishes">
+        <h2>Wishes &amp; Messages</h2>
+        <div class="card" id="messages">
+          <div class="messages" id="messageList">
+            <!-- Example messages; real messages added by visitors will appear here -->
+            <div class="msg"><div class="meta">Rohit • just now</div><div>Happy Birthday Mamatha — you deserve every bit of joy. Your positive energy inspires us all!</div></div>
+            <div class="msg"><div class="meta">Anjali • 2 hours ago</div><div>Keep shining! Can't wait for our next road trip. Have the most amazing birthday!</div></div>
+          </div>
+
+          <form id="wishForm" style="margin-top:12px;display:flex;flex-direction:column;gap:8px" onsubmit="postWish(event)">
+            <input name="name" required placeholder="Your name" style="padding:10px;border-radius:10px;border:1px solid #e6edf3" />
+            <textarea name="wish" required rows="3" placeholder="Write a short birthday wish" style="padding:10px;border-radius:10px;border:1px solid #e6edf3"></textarea>
+            <div style="display:flex;gap:8px">
+              <button class="cta" type="submit">Post Wish</button>
+              <button type="button" class="btn" onclick="openFriendInput()">Add a photo</button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <section id="gift" style="margin-top:24px;text-align:center">
+        <button class="cta" onclick="openGift()">Click here for your gift 🎁</button>
+
+        <!-- Gift modal -->
+        <div id="giftOverlay" class="modal-overlay" aria-hidden="true">
+          <div class="modal" role="dialog" aria-modal="true" aria-labelledby="giftTitle">
+            <button class="closeBtn" onclick="closeGift()" aria-label="Close">✕</button>
+            <div style="display:flex;gap:12px;align-items:center">
+              <div style="font-size:34px">🎉</div>
+              <div>
+                <h3 id="giftTitle" style="margin:0 0 6px">A special gift for Mamatha</h3>
+                <p class="muted" style="margin:0">I have created a portfolio for you — click the button below to view it.</p>
+              </div>
+            </div>
+
+            <div style="margin-top:14px">
+              <div id="quoteBox" class="quote">"Your journey is your power — keep going."</div>
+              <div style="margin-top:10px;display:flex;gap:8px;justify-content:center">
+                <button class="btn" onclick="showNextQuote()">Next quote</button>
+                <button class="cta" onclick="openPortfolio()">Open Portfolio</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <footer>
+      Made with love • Add photos, messages and playlist to personalise. Want this exported as a PDF or converted to a React component? Ask me.
+      <div style="margin-top: 15px;">
+        <button class="cta" onclick="showGiftPopup()" style="background: var(--red); border: none; cursor: pointer;">Click here for gift</button>
+      </div>
+      
+      <!-- Updated Footer with new buttons -->
+      <div class="footer-buttons">
+        <button class="footer-btn" onclick="showWishForm()">Share Your Wish</button>
+        <button class="footer-btn" onclick="popConfetti()">Replay Confetti</button>
+      </div>
+    </footer>
+  </div>
+
+  <div class="confetti" id="confetti"></div>
+
+  <script>
+    function scrollToSection(id){
+      const el = document.getElementById(id);
+      if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+    }
+
+    function postWish(e){
+      e.preventDefault();
+      const form = e.target;
+      const name = form.name.value.trim();
+      const wish = form.wish.value.trim();
+      if(!name||!wish) return;
+      const list = document.getElementById('messageList');
+      const node = document.createElement('div');
+      node.className='msg';
+      // Get current time for timestamp
+      const now = new Date();
+      const timeString = getTimeAgo(now);
+      node.innerHTML = `<div class="meta">${escapeHtml(name)} • ${timeString}</div><div>${escapeHtml(wish)}</div>`;
+      list.prepend(node);
+      form.reset();
+      popConfetti();
+    }
+
+    function getTimeAgo(date) {
+      const seconds = Math.floor((new Date() - date) / 1000);
+      
+      let interval = seconds / 31536000;
+      if (interval > 1) return Math.floor(interval) + " years ago";
+      
+      interval = seconds / 2592000;
+      if (interval > 1) return Math.floor(interval) + " months ago";
+      
+      interval = seconds / 86400;
+      if (interval > 1) return Math.floor(interval) + " days ago";
+      
+      interval = seconds / 3600;
+      if (interval > 1) return Math.floor(interval) + " hours ago";
+      
+      interval = seconds / 60;
+      if (interval > 1) return Math.floor(interval) + " minutes ago";
+      
+      return "just now";
+    }
+
+    function escapeHtml(s){
+      return s.replace(/[&<>"']/g, function(c){
+        return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#39;"}[c];
+      });
+    }
+
+    /* Simple confetti animation */
+    function popConfetti(){
+      const wrap = document.getElementById('confetti');
+      for(let i=0;i<40;i++){
+        const el = document.createElement('span');
+        el.style.left = Math.random()*100+'%';
+        el.style.top = (Math.random()*30)+'%';
+        el.style.background = ['#e63946','#1d4ed8','#f59e0b','#10b981'][Math.floor(Math.random()*4)];
+        el.style.transform = `rotate(${Math.random()*360}deg)`;
+        wrap.appendChild(el);
+        // animate
+        requestAnimationFrame(()=>{
+          el.style.transition = 'transform 1.6s linear, top 1.6s ease-in, opacity 1.6s';
+          el.style.top = '100%';
+          el.style.opacity = '0.9';
+        });
+        setTimeout(()=>wrap.removeChild(el),1800);
+      }
+    }
+    
+    // Hero section confetti
+    function createHeroConfetti() {
+      const container = document.getElementById('hero-confetti');
+      if (!container) return;
+      
+      for (let i = 0; i < 30; i++) {
+        setTimeout(() => {
+          const piece = document.createElement('div');
+          piece.className = 'confetti-piece';
+          piece.style.left = Math.random() * 100 + '%';
+          piece.style.background = ['#e63946', '#1d4ed8', '#ffffff', '#0f172a'][Math.floor(Math.random() * 4)];
+          piece.style.opacity = '0';
+          container.appendChild(piece);
+          
+          // Animate
+          requestAnimationFrame(() => {
+            piece.style.transition = 'top 5s linear, opacity 5s';
+            piece.style.top = '100%';
+            piece.style.opacity = '0.8';
+          });
+          
+          // Remove after animation
+          setTimeout(() => {
+            if (piece.parentNode) {
+              piece.parentNode.removeChild(piece);
+            }
+          }, 5000);
+        }, i * 200);
+      }
+    }
+
+    function togglePlaylist(){
+      alert("In a full implementation, this would open a Spotify or YouTube playlist. For now, enjoy the celebration!");
+      popConfetti();
+    }
+
+    function openFriendInput(){
+      alert("In a full implementation, this would allow adding a photo to your message. For now, enjoy sending your wish!");
+    }
+
+    // Gift popup function
+    function showGiftPopup() {
+      const popup = document.createElement('div');
+      popup.style.position = 'fixed';
+      popup.style.left = '0';
+      popup.style.top = '0';
+      popup.style.width = '100%';
+      popup.style.height = '100%';
+      popup.style.backgroundColor = 'rgba(0,0,0,0.5)';
+      popup.style.display = 'flex';
+      popup.style.justifyContent = 'center';
+      popup.style.alignItems = 'center';
+      popup.style.zIndex = '1000';
+      
+      popup.innerHTML = `
+        <div style="background: white; padding: 30px; border-radius: 16px; max-width: 500px; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.2);">
+          <h2 style="margin-top: 0; color: var(--red);">Special Gift for You!</h2>
+          <p>I have created a portfolio for you:</p>
+          <a href="https://mamatha-n-reddy.vercel.app/" target="_blank" style="display: inline-block; margin: 20px 0; padding: 12px 24px; background: var(--blue); color: white; border-radius: 12px; text-decoration: none; font-weight: bold;">Visit Portfolio</a>
+          <div style="margin-top: 20px;">
+            <button onclick="this.closest('div').parentElement.remove()" style="padding: 8px 16px; border-radius: 8px; border: 1px solid #ccc; background: white; cursor: pointer;">Close</button>
+          </div>
+        </div>
+      `;
+      
+      document.body.appendChild(popup);
+      
+      // Add confetti when popup opens
+      popConfetti();
+    }
+    
+    // Show quote popup
+    function showQuote(text) {
+      const popup = document.getElementById('quote-popup');
+      const quoteText = document.getElementById('quote-text');
+      quoteText.textContent = text;
+      popup.classList.add('active');
+    }
+    
+    // Close quote popup
+    function closeQuote() {
+      const popup = document.getElementById('quote-popup');
+      popup.classList.remove('active');
+    }
+    
+    // Show wish form
+    function showWishForm() {
+      document.getElementById('messages').scrollIntoView({behavior: 'smooth'});
+    }
+
+    // Gift modal functions
+    function openGift() {
+      document.getElementById('giftOverlay').setAttribute('aria-hidden', 'false');
+      popConfetti(); // Add confetti when opening gift
+    }
+
+    function closeGift() {
+      document.getElementById('giftOverlay').setAttribute('aria-hidden', 'true');
+    }
+
+    function openPortfolio() {
+      window.open('https://mamatha-n-reddy.vercel.app/', '_blank');
+      closeGift();
+    }
+
+    // Quotes for the gift modal
+    const quotes = [
+      "Your journey is your power — keep going.",
+      "Every step you take is a victory.",
+      "Your strength inspires everyone around you.",
+      "Believe in yourself as much as we believe in you.",
+      "You are capable of amazing things."
+    ];
+
+    let currentQuoteIndex = 0;
+
+    function showNextQuote() {
+      currentQuoteIndex = (currentQuoteIndex + 1) % quotes.length;
+      document.getElementById('quoteBox').textContent = quotes[currentQuoteIndex];
+    }
+
+    // Add confetti on page load
+    window.addEventListener('load', function() {
+      setTimeout(popConfetti, 1000);
+      createSparkles(); // Create sparkles on page load
+      createHeroConfetti(); // Create hero confetti
+    });
+    
+    // Create sparkles animation
+    function createSparkles() {
+      const container = document.getElementById('sparkles-container');
+      const sparkleCount = 30;
+      
+      for (let i = 0; i < sparkleCount; i++) {
+        setTimeout(() => {
+          const sparkle = document.createElement('div');
+          sparkle.className = 'sparkle';
+          
+          // Random position
+          const posX = Math.random() * 100;
+          const posY = Math.random() * 100;
+          const size = Math.random() * 4 + 4;
+          const delay = Math.random() * 5;
+          const duration = Math.random() * 3 + 2;
+          
+          sparkle.style.left = `${posX}%`;
+          sparkle.style.top = `${posY}%`;
+          sparkle.style.width = `${size}px`;
+          sparkle.style.height = `${size}px`;
+          sparkle.style.animationDelay = `${delay}s`;
+          sparkle.style.animationDuration = `${duration}s`;
+          
+          container.appendChild(sparkle);
+          
+          // Remove sparkle after animation completes
+          setTimeout(() => {
+            if (sparkle.parentNode) {
+              sparkle.parentNode.removeChild(sparkle);
+            }
+          }, (duration + delay) * 1000);
+        }, i * 300); // Stagger sparkle creation
+      }
+      
+      // Continuously create new sparkles
+      setInterval(() => {
+        const sparkle = document.createElement('div');
+        sparkle.className = 'sparkle';
+        
+        // Random position
+        const posX = Math.random() * 100;
+        const posY = Math.random() * 100;
+        const size = Math.random() * 4 + 4;
+        const duration = Math.random() * 3 + 2;
+        
+        sparkle.style.left = `${posX}%`;
+        sparkle.style.top = `${posY}%`;
+        sparkle.style.width = `${size}px`;
+        sparkle.style.height = `${size}px`;
+        sparkle.style.animationDuration = `${duration}s`;
+        
+        container.appendChild(sparkle);
+        
+        // Remove sparkle after animation completes
+        setTimeout(() => {
+          if (sparkle.parentNode) {
+            sparkle.parentNode.removeChild(sparkle);
+          }
+        }, duration * 1000);
+      }, 800);
+    }
+  </script>
+</body>
+</html>
