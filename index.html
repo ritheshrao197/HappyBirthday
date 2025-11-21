@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -542,22 +543,54 @@
     .msg .meta{font-size:12px;color:var(--muted);margin-bottom:6px}
 
     /* Responsive */
+    @media (max-width:1100px){
+      .wrap{padding:14px}
+      .carousel-icon{width:64px;height:64px;font-size:1.6rem}
+      .carousel-item{min-width:110px}
+    }
+
     @media (max-width:900px){
       .hero{grid-template-columns:1fr}
       .two-col{grid-template-columns:1fr}
       .gallery{grid-template-columns:repeat(2,1fr)}
-      .main-header h1 { font-size: 2rem; }
-      .main-header p { font-size: 1.1rem; }
-      .timeline::before {
-        left: 30px;
-      }
-      .timeline-item {
-        width: calc(100% - 80px);
-        left: 80px !important;
-      }
-      .timeline-item:nth-child(even) .timeline-icon {
-        left: -25px;
-      }
+      .main-header h1 { font-size: 1.8rem; }
+      .main-header p { font-size: 1rem; }
+      .timeline::before { left: 30px; }
+      .timeline-item { width: calc(100% - 80px); left: 80px !important; }
+      .timeline-item:nth-child(even) .timeline-icon { left: -25px; }
+      .motto-banner { padding: 28px 14px }
+      .motto-banner h2 { font-size: 1.6rem }
+      .motto-banner p { font-size: 1.1rem }
+      .map-container { height: 300px }
+      .main-nav { position: fixed; right: 14px; top: 82px; display: none; flex-direction: column; gap:10px; background: rgba(255,255,255,0.95); padding:12px; border-radius:12px; box-shadow: var(--card-shadow); z-index:1100 }
+      .main-nav.show { display:flex }
+      .mobile-hamb { display:inline-flex }
+      nav .btn, nav .primary{white-space:nowrap}
+    }
+
+    @media (max-width:600px){
+      .main-header { padding: 20px 12px }
+      .main-header h1 { font-size: 1.4rem }
+      .hero-section { padding: 28px 12px }
+      .carousel-item { min-width: 92px }
+      .carousel-icon{width:56px;height:56px}
+      .map-container { height: 220px }
+      .dashboard { grid-template-columns: 1fr }
+      .wish-note { width: 160px; min-height:120px }
+      .logo{width:48px;height:48px;font-size:16px}
+      .title h1{font-size:16px}
+      .title p{font-size:12px}
+      header{align-items:center}
+      .main-nav{right:10px;top:72px}
+      /* Flip game responsive tweak */
+      #mg-board{grid-template-columns:repeat(2,1fr)}
+    }
+
+    /* make buttons full-width on small screens inside controls area */
+    @media (max-width:480px){
+      #mg-restart, #mg-hint{flex:1;width:48%}
+      .carousel{gap:12px;padding:8px}
+      .carousel-text{font-size:0.85rem}
     }
 
     /* small helpers */
@@ -595,7 +628,7 @@
   <!-- Hero Section -->
   <div class="hero-section">
     <div class="hero-confetti" id="hero-confetti"></div>
-    <h1>Happy Birthday, Mamatha Reddy!</h1>
+    <!-- <h1>Happy Birthday, Mamatha Reddy!</h1> -->
     <p>You fill the world with love, courage, and new adventures every single day.</p>
   </div>
   
@@ -608,7 +641,11 @@
           <p class="sub">A warm tribute celebrating heart, hope and happiness</p>
         </div>
       </div>
-      <nav>
+
+      <!-- Mobile hamburger -->
+      <button id="navToggle" aria-expanded="false" aria-label="Open menu" class="btn mobile-hamb" onclick="toggleNav()">☰</button>
+
+      <nav id="mainNav" class="main-nav">
         <button class="btn" onclick="scrollToSection('about')">About</button>
         <button class="btn" onclick="scrollToSection('favorites')">Favorites</button>
         <button class="btn" onclick="scrollToSection('wishes')">Wishes</button>
@@ -660,6 +697,8 @@
         </div>
       </div>
       
+
+
       <!-- Quote Popup -->
       <div class="quote-popup" id="quote-popup">
         <span class="close" onclick="closeQuote()">&times;</span>
@@ -673,6 +712,120 @@
         <p>Your resilience inspires everyone around you.</p>
       </div>
       
+      <!-- ===== Mamatha's Favorites — Flip Match Game (merged) ===== -->
+      <section id="flip-game" style="margin-top:40px">
+        <h2 style="text-align:center">Play: Match Mamatha's Favorites</h2>
+        <div style="max-width:980px;margin:14px auto;padding:18px;background:linear-gradient(180deg,rgba(255,255,255,0.85),#fff);border-radius:14px;box-shadow:0 12px 30px rgba(15,23,42,0.06)">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
+            <div>
+              <strong style="font-size:16px">Mamatha's Favorites — Flip Match Game</strong>
+              <div class="muted" style="font-size:13px">Match pairs of Mamatha's favorite things. Finish quickly to win confetti!</div>
+            </div>
+            <div style="font-size:14px;color:var(--muted)">Moves: <span id="mg-moves">0</span> • Matches: <span id="mg-matches">0</span> • Time: <span id="mg-timer">00:00</span></div>
+          </div>
+
+          <div style="display:flex;gap:12px;margin-top:12px;align-items:center">
+            <button class="cta" id="mg-restart" style="padding:8px 12px">Restart</button>
+            <button class="btn" id="mg-hint" style="padding:8px 12px">Hint</button>
+            <div style="margin-left:auto;color:var(--muted);font-size:13px">Tip: Tap or press Enter on a tile to flip.</div>
+          </div>
+
+          <div id="mg-board" style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:14px"></div>
+        </div>
+
+        <!-- Win modal (reuses existing modal patterns) -->
+        <div id="mg-win" class="modal-overlay" aria-hidden="true" style="z-index:1200">
+          <div class="modal">
+            <button class="closeBtn" onclick="closeMgWin()">✕</button>
+            <h3>🎉 You matched them all!</h3>
+            <p id="mg-final" class="muted">Great job — you matched all favorites.</p>
+            <div style="margin-top:12px;display:flex;gap:8px;justify-content:center">
+              <button class="cta" onclick="mgRestart()">Play again</button>
+              <button class="btn" onclick="window.open('https://mamatha-n-reddy.vercel.app/','_blank')">Open Portfolio</button>
+            </div>
+          </div>
+        </div>
+
+        <style>
+          /* Scoped small styles for the merged flip game */
+          #mg-board .mg-card{perspective:900px}
+          #mg-board .mg-tile{position:relative;padding-top:100%;border-radius:12px;cursor:pointer}
+          #mg-board .mg-inner{position:absolute;inset:0;transition:transform .55s;transform-style:preserve-3d}
+          #mg-board .mg-tile.flipped .mg-inner{transform:rotateY(180deg)}
+          #mg-board .mg-face{position:absolute;inset:0;border-radius:12px;display:flex;align-items:center;justify-content:center;backface-visibility:hidden}
+          #mg-board .mg-front{background:linear-gradient(180deg,#ffffff,#f8fafc);border:1px solid rgba(15,23,42,0.04)}
+          #mg-board .mg-back{background:linear-gradient(180deg,var(--blue),var(--red));color:white;transform:rotateY(180deg);font-weight:700}
+          #mg-board .mg-emoji{font-size:28px}
+          @media (max-width:900px){ #mg-board{grid-template-columns:repeat(3,1fr)} }
+        </style>
+
+        <script>
+          (function(){
+            const items = [
+              {key:'biriyani', label:'Biriyani', emoji:'🍛'},
+              {key:'cake', label:'Chocolate Cake', emoji:'🎂'},
+              {key:'watermelon', label:'Watermelon Juice', emoji:'🍉'},
+              {key:'travel', label:'Travel', emoji:'🗺️'},
+              {key:'pickle', label:'Pickleball', emoji:'🏓'},
+              {key:'pups', label:'Pups', emoji:'🐶'},
+              {key:'dosa', label:'Dosa', emoji:'🥞'},
+              {key:'pine', label:'Pineapple', emoji:'🍍'}
+            ];
+
+            const board = document.getElementById('mg-board');
+            const movesEl = document.getElementById('mg-moves');
+            const matchesEl = document.getElementById('mg-matches');
+            const timerEl = document.getElementById('mg-timer');
+            const winOverlay = document.getElementById('mg-win');
+            const finalStats = document.getElementById('mg-final');
+
+            let deck = [], moves=0, matches=0, first=null, second=null, lock=false, startTime=null, timerInterval=null;
+
+            function shuffle(a){ for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]} return a; }
+            function buildDeck(){ const d=[]; items.forEach(it=>{d.push({...it}); d.push({...it})}); return shuffle(d); }
+
+            function render(){ board.innerHTML=''; deck = buildDeck(); deck.forEach((c,idx)=>{
+              const card = document.createElement('div'); card.className='mg-card';
+              card.innerHTML = `
+                <div class="mg-tile" data-key="${c.key}" data-idx="${idx}" tabindex="0">
+                  <div class="mg-inner">
+                    <div class="mg-face mg-front"><div style="text-align:center"><div class="mg-emoji">❓</div></div></div>
+                    <div class="mg-face mg-back"><div style="text-align:center"><div class="mg-emoji">${c.emoji}</div><div style="font-size:12px;margin-top:6px">${c.label}</div></div></div>
+                  </div>
+                </div>`;
+              board.appendChild(card);
+              const tile = card.querySelector('.mg-tile');
+              tile.addEventListener('click', ()=>mgFlip(tile));
+              tile.addEventListener('keydown', (e)=>{ if(e.key==='Enter' || e.key===' ') mgFlip(tile); });
+            });
+            }
+
+            function mgFlip(tile){ if(lock) return; if(tile.classList.contains('matched')) return; if(!startTime) startTimer(); if(tile===first) return; tile.classList.add('flipped'); if(!first){ first=tile; return; } second=tile; lock=true; moves++; update(); if(first.dataset.key===second.dataset.key){ setTimeout(()=>{ first.classList.add('matched'); second.classList.add('matched'); matches++; resetTurn(); update(); if(matches===items.length) mgWin(); }, 450); } else { setTimeout(()=>{ first.classList.remove('flipped'); second.classList.remove('flipped'); resetTurn(); }, 700); } }
+
+            function resetTurn(){ first=null; second=null; lock=false; }
+            function update(){ movesEl.textContent=moves; matchesEl.textContent=matches; }
+
+            function startTimer(){ startTime = Date.now(); timerInterval = setInterval(()=>{ const diff = Math.floor((Date.now()-startTime)/1000); const mm = String(Math.floor(diff/60)).padStart(2,'0'); const ss = String(diff%60).padStart(2,'0'); timerEl.textContent = mm+':'+ss; }, 500); }
+            function stopTimer(){ if(timerInterval) clearInterval(timerInterval); timerInterval=null; }
+
+            function mgWin(){ stopTimer(); finalStats.textContent = `Moves: ${moves} • Time: ${timerEl.textContent}`; winOverlay.setAttribute('aria-hidden','false'); // use existing confetti
+              if(window.popConfetti) popConfetti(); else console.log('popConfetti not found'); }
+            function closeMgWin(){ winOverlay.setAttribute('aria-hidden','true'); }
+
+            function mgRestart(){ closeMgWin(); reset(); }
+
+            function reset(){ stopTimer(); startTime=null; moves=0; matches=0; first=null; second=null; lock=false; update(); timerEl.textContent='00:00'; render(); }
+
+            document.getElementById('mg-restart').addEventListener('click', reset);
+            document.getElementById('mg-hint').addEventListener('click', ()=>{
+              const unmatched = Array.from(document.querySelectorAll('#mg-board .mg-tile')).filter(t=>!t.classList.contains('matched') && !t.classList.contains('flipped'));
+              if(unmatched.length<2) return; const a = unmatched[Math.floor(Math.random()*unmatched.length)]; let b = unmatched[Math.floor(Math.random()*unmatched.length)]; while(b===a && unmatched.length>1) b = unmatched[Math.floor(Math.random()*unmatched.length)]; a.classList.add('flipped'); b.classList.add('flipped'); setTimeout(()=>{ a.classList.remove('flipped'); b.classList.remove('flipped'); }, 900);
+            });
+
+            // init
+            render();
+          })();
+        </script>
       <!-- Spiritual & Adventure Journey Map -->
       <div class="journey-map">
         <h2>Spiritual & Adventure Journey</h2>
@@ -725,30 +878,7 @@
         </div>
       </div>
       
-      <!-- Moments of Kindness Timeline -->
-      <div class="timeline">
-        <div class="timeline-item">
-          <div class="timeline-icon">👟</div>
-          <div class="timeline-content">
-            <h3>Kind Friend</h3>
-            <p>A friend once put on your shoes when you forgot them at home.</p>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-icon">🍰</div>
-          <div class="timeline-content">
-            <h3>Pre-Birthday Cake</h3>
-            <p>You got a surprise cake a day before your birthday!</p>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-icon">🎁</div>
-          <div class="timeline-content">
-            <h3>Birthday Gift</h3>
-            <p>The thoughtful gift that brought tears to your eyes.</p>
-          </div>
-        </div>
-      </div>
+  
       
       <!-- Wishes & Cheer Wall -->
       <div class="wishes-wall">
@@ -856,56 +986,14 @@
         </div>
       </section>
 
-      <section id="wishes">
-        <h2>Wishes &amp; Messages</h2>
-        <div class="card" id="messages">
-          <div class="messages" id="messageList">
-            <!-- Example messages; real messages added by visitors will appear here -->
-            <div class="msg"><div class="meta">Rohit • just now</div><div>Happy Birthday Mamatha — you deserve every bit of joy. Your positive energy inspires us all!</div></div>
-            <div class="msg"><div class="meta">Anjali • 2 hours ago</div><div>Keep shining! Can't wait for our next road trip. Have the most amazing birthday!</div></div>
-          </div>
+    
 
-          <form id="wishForm" style="margin-top:12px;display:flex;flex-direction:column;gap:8px" onsubmit="postWish(event)">
-            <input name="name" required placeholder="Your name" style="padding:10px;border-radius:10px;border:1px solid #e6edf3" />
-            <textarea name="wish" required rows="3" placeholder="Write a short birthday wish" style="padding:10px;border-radius:10px;border:1px solid #e6edf3"></textarea>
-            <div style="display:flex;gap:8px">
-              <button class="cta" type="submit">Post Wish</button>
-              <button type="button" class="btn" onclick="openFriendInput()">Add a photo</button>
-            </div>
-          </form>
-        </div>
-      </section>
-
-      <section id="gift" style="margin-top:24px;text-align:center">
-        <button class="cta" onclick="openGift()">Click here for your gift 🎁</button>
-
-        <!-- Gift modal -->
-        <div id="giftOverlay" class="modal-overlay" aria-hidden="true">
-          <div class="modal" role="dialog" aria-modal="true" aria-labelledby="giftTitle">
-            <button class="closeBtn" onclick="closeGift()" aria-label="Close">✕</button>
-            <div style="display:flex;gap:12px;align-items:center">
-              <div style="font-size:34px">🎉</div>
-              <div>
-                <h3 id="giftTitle" style="margin:0 0 6px">A special gift for Mamatha</h3>
-                <p class="muted" style="margin:0">I have created a portfolio for you — click the button below to view it.</p>
-              </div>
-            </div>
-
-            <div style="margin-top:14px">
-              <div id="quoteBox" class="quote">"Your journey is your power — keep going."</div>
-              <div style="margin-top:10px;display:flex;gap:8px;justify-content:center">
-                <button class="btn" onclick="showNextQuote()">Next quote</button>
-                <button class="cta" onclick="openPortfolio()">Open Portfolio</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      
 
     </main>
 
     <footer>
-      Made with love • Add photos, messages and playlist to personalise. Want this exported as a PDF or converted to a React component? Ask me.
+      Made with love 
       
       <!-- Updated Footer with new buttons -->
       <div class="footer-buttons">
@@ -922,6 +1010,24 @@
       const el = document.getElementById(id);
       if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
     }
+
+    function toggleNav(){
+      const btn = document.getElementById('navToggle');
+      const nav = document.getElementById('mainNav');
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!expanded));
+      if(!expanded){ nav.classList.add('show'); } else { nav.classList.remove('show'); }
+    }
+
+    // close mobile nav when clicking outside
+    document.addEventListener('click', (e)=>{
+      const nav = document.getElementById('mainNav');
+      const btn = document.getElementById('navToggle');
+      if(!nav || !btn) return;
+      if(nav.classList.contains('show') && !nav.contains(e.target) && !btn.contains(e.target)){
+        nav.classList.remove('show'); btn.setAttribute('aria-expanded','false');
+      }
+    });
 
     function postWish(e){
       e.preventDefault();
@@ -963,7 +1069,7 @@
     }
 
     function escapeHtml(s){
-      return s.replace(/[&<>"']/g, function(c){
+      return s.replace(/[&<>\"']/g, function(c){
         return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#39;"}[c];
       });
     }
