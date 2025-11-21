@@ -821,6 +821,13 @@
               if(unmatched.length<2) return; const a = unmatched[Math.floor(Math.random()*unmatched.length)]; let b = unmatched[Math.floor(Math.random()*unmatched.length)]; while(b===a && unmatched.length>1) b = unmatched[Math.floor(Math.random()*unmatched.length)]; a.classList.add('flipped'); b.classList.add('flipped'); setTimeout(()=>{ a.classList.remove('flipped'); b.classList.remove('flipped'); }, 900);
             });
 
+            // Close modal when clicking on the overlay (not the content)
+            winOverlay.addEventListener('click', function(e) {
+              if (e.target === winOverlay) {
+                closeMgWin();
+              }
+            });
+
             // init
             render();
           })();
@@ -902,7 +909,7 @@
           <h2 class="lead">Heart, Hope &amp; Happiness</h2>
           <p class="sub">A heartfelt tribute page made to celebrate Mamatha — her spirit, dreams, and the small things that make life joyful.</p>
 
-          <div class="grid-3" aria-hidden>
+          <!-- <div class="grid-3" aria-hidden>
             <div class="pill"><strong>Morning person</strong><div class="muted">Loves sunrises &amp; peaceful mornings</div></div>
             <div class="pill"><strong>Top hobbies</strong><div class="muted">Travel, learning, vlogging, pickleball</div></div>
             <div class="pill"><strong>Favorite treat</strong><div class="muted">Chocolate cake &amp; biriyani</div></div>
@@ -913,9 +920,9 @@
             <button class="btn" onclick="togglePlaylist()">Play playlist</button>
             <button class="btn" onclick="popConfetti()">Celebrate 🎉</button>
           </div>
-        </div>
+        </div> -->
 
-        <aside class="card" style="display:flex;flex-direction:column;gap:12px">
+        <!-- <aside class="card" style="display:flex;flex-direction:column;gap:12px">
           <div style="display:flex;align-items:center;gap:12px">
             <div style="width:84px;height:84px;border-radius:12px;background:#f8fafc;display:flex;align-items:center;justify-content:center">Photo</div>
             <div>
@@ -935,7 +942,7 @@
             <small class="muted">(click Play playlist to open the embedded player)</small>
           </div>
         </aside>
-      </section>
+      </section> -->
 
       <section id="about">
         <div class="two-col">
@@ -954,7 +961,7 @@
               </ul>
             </div>
 
-            <h2 style="margin-top:18px">Dreams &amp; Passions</h2>
+            <!-- <h2 style="margin-top:18px">Dreams &amp; Passions</h2>
             <div class="card">
               <p>Romantic, thriller, fantasy and action movies fill her entertainment world. Her hobbies include vlogging adventures and trying new experiences. She deeply values personal growth, rest, and cultivating meaningful connections with friends and family.</p>
             </div>
@@ -964,8 +971,8 @@
             <h2>Quick Quirks</h2>
             <div class="card">
               <p>Loves pups, pineapples, gadgets, shoes and jackets. Wishes for time travel and laughs easily at silly jokes. Her infectious smile brightens any room she enters.</p>
-            </div>
-          </aside>
+            </div>-->
+          </aside> 
         </div>
       </section>
 
@@ -996,8 +1003,7 @@
       
       <!-- Updated Footer with new buttons -->
       <div class="footer-buttons">
-        <button class="footer-btn" onclick="showWishForm()">Share Your Wish</button>
-        <button class="footer-btn" onclick="popConfetti()">Replay Confetti</button>
+        <button class="footer-btn" onclick="openGift()">Open Gift</button>
       </div>
     </footer>
   </div>
@@ -1187,6 +1193,8 @@
     function openGift() {
       document.getElementById('giftOverlay').setAttribute('aria-hidden', 'false');
       popConfetti(); // Add confetti when opening gift
+      // Play sound effect
+      playGiftSound();
     }
 
     function closeGift() {
@@ -1198,20 +1206,11 @@
       closeGift();
     }
 
-    // Quotes for the gift modal
-    const quotes = [
-      "Your journey is your power — keep going.",
-      "Every step you take is a victory.",
-      "Your strength inspires everyone around you.",
-      "Believe in yourself as much as we believe in you.",
-      "You are capable of amazing things."
-    ];
-
-    let currentQuoteIndex = 0;
-
-    function showNextQuote() {
-      currentQuoteIndex = (currentQuoteIndex + 1) % quotes.length;
-      document.getElementById('quoteBox').textContent = quotes[currentQuoteIndex];
+    // Function to play sound effect
+    function playGiftSound() {
+      // In a real implementation, you would play an actual sound file
+      // For now, we'll just log to the console
+      console.log("🎁 Sound effect would play here");
     }
 
     // Add confetti on page load
@@ -1284,5 +1283,129 @@
       }, 800);
     }
   </script>
-</body>
-</html>
+  
+  <!-- Gift Box Reveal Modal -->
+  <div id="giftOverlay" class="modal-overlay" aria-hidden="true">
+    <div class="modal" style="max-width: 600px; text-align: center;">
+      <button class="closeBtn" onclick="closeGift()">✕</button>
+      
+      <!-- Gift Box Illustration -->
+      <div id="giftBox" class="gift-box" style="position: relative; width: 200px; height: 200px; margin: 0 auto 20px;">
+        <!-- Box Lid -->
+        <div id="boxLid" class="box-lid" style="position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 220px; height: 60px; background: linear-gradient(135deg, #e63946, #d00000); border-radius: 10px 10px 0 0; z-index: 2; transition: transform 1s ease;">
+          <div style="position: absolute; top: -10px; left: 50%; transform: translateX(-50%); width: 40px; height: 40px; background: #ff9e9e; border-radius: 50%;"></div>
+        </div>
+        
+        <!-- Box Body -->
+        <div class="box-body" style="position: absolute; top: 50px; left: 50%; transform: translateX(-50%); width: 200px; height: 150px; background: linear-gradient(135deg, #1d4ed8, #0030a1); border-radius: 0 0 10px 10px; z-index: 1;">
+          <div style="position: absolute; top: 20px; left: 50%; transform: translateX(-50%); width: 160px; height: 40px; border: 2px dashed white; border-radius: 5px;"></div>
+        </div>
+        
+        <!-- Ribbon -->
+        <div class="ribbon-vertical" style="position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 20px; height: 200px; background: #ffd700;"></div>
+        <div class="ribbon-horizontal" style="position: absolute; top: 80px; left: 50%; transform: translateX(-50%); width: 220px; height: 20px; background: #ffd700;"></div>
+      </div>
+      
+      <!-- Message that appears after box opens -->
+      <div id="giftMessage" style="display: none; margin: 20px 0;">
+        <h2 style="color: #e63946; font-size: 1.8rem; font-weight: 700; margin-bottom: 15px; font-family: 'Comic Sans MS', 'Arial Rounded MT Bold', 'Segoe UI', sans-serif;">
+          Mamatha, this year your stories shine! A new portfolio, made with love, just for you 🥳
+        </h2>
+        
+        <!-- Unwrap Portfolio Button -->
+        <a href="https://mamatha-n-reddy.vercel.app/" target="_blank" class="cta" style="padding: 14px 28px; font-size: 1.2rem; margin-top: 20px; display: inline-block;">
+          Unwrap Portfolio
+        </a>
+      </div>
+      
+      <!-- Open Box Button -->
+      <button id="openBoxBtn" class="btn primary" style="padding: 12px 24px; margin-top: 20px;" onclick="openGiftBox()">
+        Open Gift Box
+      </button>
+    </div>
+  </div>
+  
+  <style>
+    /* Gift Box Animation */
+    .gift-opened #box-lid {
+      transform: translateX(-50%) rotate(-20deg) translateY(-80px) translateX(40px) !important;
+    }
+    
+    .gift-opened #giftMessage {
+      display: block !important;
+      animation: fadeIn 1s ease forwards;
+    }
+    
+    .gift-opened #openBoxBtn {
+      display: none !important;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    /* Sparkling effect */
+    .sparkle-effect {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #ffd700;
+      box-shadow: 0 0 10px 2px #ffd700;
+      animation: sparkle 1s infinite;
+    }
+    
+    @keyframes sparkle {
+      0%, 100% { opacity: 0; transform: scale(0); }
+      50% { opacity: 1; transform: scale(1); }
+    }
+  </style>
+  
+  <script>
+    function openGiftBox() {
+      const giftBox = document.getElementById('giftBox');
+      const lid = document.getElementById('boxLid');
+      const message = document.getElementById('giftMessage');
+      const button = document.getElementById('openBoxBtn');
+      
+      // Add class to trigger animations
+      giftBox.classList.add('gift-opened');
+      
+      // Play sound effect
+      playGiftSound();
+      
+      // Create sparkling effect
+      createSparklesEffect();
+    }
+    
+    function createSparklesEffect() {
+      const giftBox = document.getElementById('giftBox');
+      const sparkleCount = 20;
+      
+      for (let i = 0; i < sparkleCount; i++) {
+        setTimeout(() => {
+          const sparkle = document.createElement('div');
+          sparkle.className = 'sparkle-effect';
+          
+          // Random position around the box
+          const posX = Math.random() * 200;
+          const posY = Math.random() * 200;
+          
+          sparkle.style.left = `${posX}px`;
+          sparkle.style.top = `${posY}px`;
+          
+          giftBox.appendChild(sparkle);
+          
+          // Remove sparkle after animation
+          setTimeout(() => {
+            if (sparkle.parentNode) {
+              sparkle.parentNode.removeChild(sparkle);
+            }
+          }, 1000);
+        }, i * 100);
+      }
+    }
+  </script>
+&lt;/body&gt;
+&lt;/html&gt;
